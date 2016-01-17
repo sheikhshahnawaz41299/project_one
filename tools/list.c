@@ -47,16 +47,22 @@ int list_del(struct list **head, void *content)
     return 0;
 }
 
+/* free list*/
 int list_free(struct list *head) 
 {
     struct list *tmp = head;
+    struct list *next_head = NULL;
     
     while(tmp) {
-    
-    
-        tmp = tmp->next;
-        
+        if(tmp->next) {
+            next_head = tmp->next;
+        } else {
+            next_head = NULL;
+        }
+        free(tmp);
+        tmp = next_head;
     }
+    
     return 0;
 }
 
@@ -66,6 +72,7 @@ int main(int argc, char **argv) {
 	struct list *head;
 	list_add(&head, "char");
 	printf("%s\n", (char *)(head->content));
+	
 	return 0;
 }	
 
