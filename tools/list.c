@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
 #include "list.h"
 
 int list_add(struct list **phead, void *content) 
@@ -6,7 +9,7 @@ int list_add(struct list **phead, void *content)
     
     new_node = (struct list*)malloc(sizeof(struct list));
     if(new_node == NULL) {
-        printk("[%s]malloc fail.\n", __func__);
+        printf("[%s]malloc fail.\n", __func__);
         return -1;
     }    
     new_node->prev = NULL;
@@ -21,14 +24,14 @@ int list_add(struct list **phead, void *content)
     
     /* if head is not null */
     /* if just one node */
-    if(*phead->next == NULL) {
-        *phead->next = new_node;
+    if((*phead)->next == NULL) {
+        (*phead)->next = new_node;
         new_node->prev = *phead;
     } else {    /* if more than one node */
         new_node->prev = *phead;
-        new_node->next = *phead->next;
-        *phead->next->prev = new_node;
-        *phead->next = new_node;
+        new_node->next = (*phead)->next;
+        (*phead)->next->prev = new_node;
+        (*phead)->next = new_node;
     }
     
     return 0;
@@ -56,3 +59,14 @@ int list_free(struct list *head)
     }
     return 0;
 }
+
+#if 0
+/* for test of general list tool */
+int main(int argc, char **argv) {
+	struct list *head;
+	list_add(&head, "char");
+	printf("%s\n", (char *)(head->content));
+	return 0;
+}	
+
+#endif
