@@ -45,6 +45,28 @@ int list_add(struct list **phead, void *content)
 
 int list_add_tail(struct list **head, void *content)
 {
+	struct list *tmp = *head;
+	struct list *new_node = NULL;
+
+	/* get last node */
+	while(tmp) {
+		if(tmp->next == NULL)
+			break;	
+		else
+			tmp = tmp->next;	
+	}
+
+	new_node = (struct list *)malloc(sizeof(struct list)); 
+	if (new_node == NULL) {
+		printf("[%s]malloc fail.\n", __func__);
+		return -ENOMEM;
+	}
+	new_node->next = NULL;
+	new_node->prev = tmp;
+	new_node->content = content;
+
+	tmp->next = new_node;
+
 	return 0;
 }
 
@@ -78,7 +100,10 @@ int main(int argc, char **argv)
 	struct list *head;
 
 	list_add(&head, "list test.");
+	list_add_tail(&head, "list add tail.");
 	printf("%s\n", (char *)(head->content));
+	printf("%s\n", (char *)(head->next->content));
+	
 	list_free(head);
 	return 0;
 }
