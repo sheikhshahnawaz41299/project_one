@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <errno.h>
 #include "list.h"
 
 int list_add(struct list **phead, void *content)
@@ -70,15 +71,15 @@ int list_free(struct list *head)
 	return 0;
 }
 
-#if 0
+#if 1
 /* for test of general list tool */
 int main(int argc, char **argv)
 {
 	struct list *head;
 
-	list_add(&head, "char");
+	list_add(&head, "list test.");
 	printf("%s\n", (char *)(head->content));
-
+	list_free(head);
 	return 0;
 }
 
