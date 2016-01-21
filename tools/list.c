@@ -73,43 +73,41 @@ int list_add_tail(struct list **head, void *content)
 /* del node by it's address */
 int list_del(struct list **head, struct list *freed)
 {
- struct list *tmp = *head;
+	struct list *tmp = *head;
 	struct list *next_head = NULL;
 
     /* if content not free */
-	     if(freed->content != NULL) {
-	      PRINTF_INF("node content not free,please free content first.\n");
-	       return -1;
-	  }
+	if(freed->content != NULL) {
+		PRINTF_INF("node content not free,please free content first.\n");
+		return -1;
+	}
 
 	while (tmp) {
-	     if(tmp == freed) {
-	         
-	         /* if first node is be freed */
-	         if(tmp == *head) {
-	             /* if list has more than  1 node */
-	             if(tmp->next !=NULL) {
-	                 *head = (*head)->next;
-	                 (*head)->prev = NULL;
-	             } else {
-	             /* list has just 1 node */
-	                 *head = NULL;
-	             }
-	         } else {
-	             freed->prev-next = freed->next?freed->next:NULL;
-	             if(freed->next != NULL) {
-	                 freed->next->prev = freed->prev;
-	             }
-	             
-	         }
-	         free(tmp);
-	         PRINTF_INF("free node succeed.\n");
-	         return 0;
-	     }
- tmp = tmp->next;
+		if(tmp == freed) {
+		/* if first node is be freed */
+			if(tmp == *head) {
+				/* if list has more than  1 node */
+				if(tmp->next !=NULL) {
+					*head = (*head)->next;
+					(*head)->prev = NULL;
+				} else {
+					/* list has just 1 node */
+					*head = NULL;
+				}
+			} else {
+				freed->prev-next = freed->next?freed->next:NULL;
+				if(freed->next != NULL) {
+					freed->next->prev = freed->prev;
+				}             
+			}
+			free(tmp);
+			PRINTF_INF("free node succeed.\n");
+			return 0;
 		}
-		PRINTF_INF("this node is not in list.\n");
-		
+		tmp = tmp->next;
+	}
+	PRINTF_INF("this node is not in list.\n");	
+
 	return 0;
 }
 
