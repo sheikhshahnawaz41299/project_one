@@ -8,7 +8,7 @@
 #include <malloc.h>
 #include <errno.h>
 #include "list.h"
-
+#include "print_log.h"
 int list_add(struct list **phead, void *content)
 {
 	struct list *new_node = NULL;
@@ -95,7 +95,7 @@ int list_del(struct list **head, struct list *freed)
 					*head = NULL;
 				}
 			} else {
-				freed->prev-next = freed->next?freed->next:NULL;
+				freed->prev->next = freed->next?freed->next:NULL;
 				if(freed->next != NULL) {
 					freed->next->prev = freed->prev;
 				}             
