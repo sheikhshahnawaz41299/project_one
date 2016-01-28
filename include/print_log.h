@@ -19,12 +19,12 @@
 #ifndef __PRINT_LOG_H__
 #define __PRINT_LOG_H__
 
-#define PRINTF_INF(fmt,param...) printf("INF[%s][%s][%d]"fmt, __FILE__, __func__, __LINE__, ##param);
-#define PRINTF_ERR(fmt,param...) printf("ERR[%s][%s][%d]"fmt, __FILE__, __func__, __LINE__, ##param);
+#define PRINTF_INF(fmt,param...) printf("INF[][%s][%d]"fmt, __func__, __LINE__, ##param);
+#define PRINTF_ERR(fmt,param...) printf("ERR[][%s][%d]"fmt, __func__, __LINE__, ##param);
 
 /* if 1,PRINTF_DBG will print debug infomation */
 #if 1
-#define PRINTF_DBG(fmt,param...) printf("DBG[%s][%s][%d]"fmt, __FILE__, __func__, __LINE__, ##param);
+#define PRINTF_DBG(fmt,param...) printf("DBG[][%s][%d]"fmt, __func__, __LINE__, ##param);
 #else
 #define PRINTF_DBG(fmt,param...) 
 #endif
