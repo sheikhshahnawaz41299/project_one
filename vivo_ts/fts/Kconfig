@@ -1,0 +1,26 @@
+#
+# FTS configuration
+#
+menuconfig BBK_FTS
+	bool "FTS touchsreen 2A052"
+	help
+	  Say Y here, and a list of miscellaneous input drivers will be displayed.
+	  Everything that didn't fit into the other categories is here. This option
+	  doesn't affect the kernel.
+
+	  If unsure, say Y.
+
+if BBK_FTS
+
+config	TOUCHSCREEN_FTS
+        tristate "STMicroelectronics i2c multitouch touchscreen with FingerTipS"
+        depends on I2C
+        help
+          Say Y here to enable STMicroelectronics touchscreen support.
+
+          If unsure, say N.
+
+          To compile this driver as a module, choose M here: the
+          module will be called STM_ts.
+	  
+endif
