@@ -244,7 +244,7 @@ int touchscreen_request_send(int id,int state)
 			list_add_tail(&req->req_list, &touchscreen_kthread_ctl.req_lists);
      		       mutex_unlock(&touchscreen_kthread_ctl.mux);
 			wake_up(&touchscreen_kthread_ctl.wait);
-			if(req->req_id == TOUCHSCREEN_REQ_ID_PROX_STATE) {
+			if(id == TOUCHSCREEN_REQ_ID_PROX_STATE) {
 				if(req != NULL) {
 					if(&req->done != NULL) {
 						wait_for_completion(&req->done);
